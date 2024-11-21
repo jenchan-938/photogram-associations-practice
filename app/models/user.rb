@@ -40,10 +40,10 @@ class User < ApplicationRecord
   ### Scoped direct associations
 
   # User#accepted_sent_follow_requests: returns rows from the follow requests table associated to this user by the sender_id column, where status is 'accepted'
-  has_many(:accepted_sent_follow_requests, {where status: :accepted}, foreign_key: "sender_id", class_name: "FollowRequests")
+  has_many(:accepted_sent_follow_requests, ->{where status: :accepted}, foreign_key: "sender_id", class_name: "FollowRequests")
 
   # User#accepted_received_follow_requests: returns rows from the follow requests table associated to this user by the recipient_id column, where status is 'accepted'
-  has_many(:accepted_received_follow_requests, {where status: :accepted}, foreign_key: "recipient_id", class_name: "FollowRequests")
+  has_many(:accepted_received_follow_requests, -> {where status: :accepted}, foreign_key: "recipient_id", class_name: "FollowRequests")
 
 
   ## Indirect associations
